@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    TouchableOpacity,
+    StatusBar
+} from 'react-native'
 import { TextInput } from 'react-native-paper';
 import React, {useState} from 'react'
 import { auth } from '../../firebase-config';
@@ -19,6 +25,7 @@ const Resetpassword = () => {
 
   return (
     <View style={styles.container}>
+    <StatusBar backgroundColor="#79A7D3" barStyle="light-content" />
       <Text style={styles.hometopic}>Reset password</Text>
       
       <TextInput 

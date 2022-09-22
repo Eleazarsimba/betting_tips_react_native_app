@@ -1,11 +1,16 @@
 import { 
   View, 
-  Text, 
-  Button
+  Text,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native'
 import React from 'react'
 import { auth } from '../../firebase-config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntiDesign from 'react-native-vector-icons/AntDesign'
 
 const Adminpage = ({navigation}) => {
   const handleLogout = () => {
@@ -18,17 +23,112 @@ const Adminpage = ({navigation}) => {
      })
      .catch(error => alert(error.message))
  }
+
   return (
     <View>
-      <Text>Adminpage hhjhgcxgsdhjkcvc hjhdfdh</Text>
-      <Button
-          onPress = {handleLogout}
-            title="Logout"
-            color="#89ABE3FF"
-            accessibilityLabel="Clears async storage"
-      />
+      <StatusBar backgroundColor="#79A7D3" barStyle="light-content" />
+      <View style={styles.adminContainer}>
+        <Text style={styles.profileData}>ADMIN ACCOUNT</Text>
+        <View style={styles.adminContainerOptions}>
+            <TouchableOpacity style={styles.Option} onPress={() => navigation.navigate('Addadmin')}>
+                <View style={styles.icon1}>
+                  <AntiDesign name="adduser" size={30} color="#79A7D3" />
+                </View>
+                <Text style={styles.OptionData}>
+                  Add Admin
+                </Text>
+            </TouchableOpacity>
+            
+            <View style={styles.profileNotification}>
+              <TouchableOpacity style={{flexDirection: 'row'}}>
+                <View style={styles.icon1}>
+                  <Ionicons name="notifications-circle" size={30} color="#79A7D3" />
+                </View>
+                <Text style={styles.OptionData}>
+                  Notifications
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.profileCount}>
+                <Text style={styles.OptionCount}>5</Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity style={styles.Option} onPress={() => navigation.navigate('AdminTips')}>
+                <View style={styles.icon1}>
+                  <Ionicons name="football" size={30} color="#79A7D3" />
+                </View>
+                <Text style={styles.OptionData}>
+                  Daily Tips
+                </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.Option}>
+                <View style={styles.icon1}>
+                  <Ionicons name="list" size={30} color="#79A7D3" />
+                </View>
+                <Text style={styles.OptionData}>
+                  Jackpots
+                </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.Option} onPress={handleLogout}>
+                <View style={styles.icon1}>
+                  <MaterialIcon name="logout" size={30} color="#79A7D3" />
+                </View>
+                <Text style={styles.OptionData}>
+                  Logout
+                </Text>
+            </TouchableOpacity>
+        </View>
+      </View>
     </View>
   )
 }
 
 export default Adminpage
+
+const styles = StyleSheet.create({
+  adminContainer: {
+    padding: 30,
+  },
+  adminContainerOptions: {
+    paddingTop: 40
+  },
+  profileData: {
+    fontSize: 23,
+    fontWeight: '700',
+    color: '#808080'
+  },
+  Option: {
+    flexDirection: 'row',
+    padding: 25
+  },
+  profileNotification:{
+    flexDirection: 'row',
+    padding: 25
+  },
+  OptionData:{
+    fontSize: 20,
+    color: '#808080',
+    fontWeight: '500'
+  },
+  profileCount: {
+    // marginLeft: 20,
+    backgroundColor: '#0782F9',
+    width: 25,
+    height: 25,
+    borderRadius: 50 / 2,
+    alignItems:'center',
+    justifyContent:'center',
+    borderColor: '#89ABE3FF',
+    marginLeft: 10
+  },
+  OptionCount:{
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: '500',
+  },
+  icon1:{
+     marginRight: 20,
+  },
+})

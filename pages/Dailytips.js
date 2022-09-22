@@ -15,7 +15,7 @@ const Dailytips = () => {
   const [animate, setAnimate] = useState(true);
 
   useEffect(() => {
-    const ref = store.collection('dailyTips').orderBy('TeamID', 'asc');
+    const ref = store.collection('dailyTips').orderBy('Time', 'asc');
     ref.onSnapshot((query) => {
         const objs = [];
         query.forEach((doc) => {
@@ -39,8 +39,7 @@ const Dailytips = () => {
 
   const Item = ({item}) => {
     return(
-      <View key={item.TeamID} style={styles.homeHeading}>
-        <View><Text style={styles.homeOddsID}>{item.TeamID}</Text></View>
+      <View key={item.Teams} style={styles.homeHeading}>
         <View><Text style={styles.homeOddsTime}>{item.Time}</Text></View>
         <View><Text style={styles.homeOddsTeams}>{item.Teams}</Text></View>
         <View><Text style={styles.homeOddsTip}>{item.Tip}</Text></View>
@@ -63,14 +62,11 @@ const Dailytips = () => {
                   <Text style={styles.todayD}>  {date}</Text>
                 </Text>
             </View>
-            <View>
-                <View style={styles.homeHeading}>
-                  <Text style={styles.homeHeadID}>ID</Text>
-                  <Text style={styles.homeHeadTime}>Time</Text>
-                  <Text style={styles.homeHeadTeams}>Teams</Text>
-                  <Text style={styles.homeHeadTip}>Tip</Text>
-                  <Text style={styles.homeHeadOdds}>Odds</Text>
-                </View>
+            <View style={styles.homeHeading}>
+              <Text style={styles.homeHeadTime}>Time</Text>
+              <Text style={styles.homeHeadTeams}>Teams</Text>
+              <Text style={styles.homeHeadTip}>Tip</Text>
+              <Text style={styles.homeHeadOdds}>Odds</Text>
             </View>
             <ScrollView horizontal={true} style={{flex: 1}}>
               <FlatList
@@ -115,16 +111,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-around',
   },
-  homeHeadID: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    width: 50,
-    paddingLeft: 14,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
-    marginLeft: 4
-  },
   homeHeadTime: {
     fontWeight: 'bold',
     fontSize: 20,
@@ -165,16 +151,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginLeft: 4
   },
-  homeOddsID: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    width: 50,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
-    marginLeft: 4
-  },
   homeOddsTime: {
     paddingTop: 10,
     paddingBottom: 10,
@@ -189,7 +165,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
-    width: 120,
+    width: 150,
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-around',
@@ -199,7 +175,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
-    width: 100,
+    width: 120,
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-around',

@@ -2,7 +2,8 @@ import {
   View, 
   Text, 
   StyleSheet, 
-  TouchableOpacity 
+  TouchableOpacity,
+  StatusBar
 } from 'react-native'
 import { TextInput } from 'react-native-paper';
 import React, { useState } from 'react'
@@ -27,6 +28,7 @@ const Adminlogin = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#79A7D3" barStyle="light-content" />
       <Text style={styles.hometopic}>Login</Text>
       
       <TextInput 

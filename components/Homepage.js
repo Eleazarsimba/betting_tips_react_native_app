@@ -2,7 +2,8 @@ import {
     View, 
     Text, 
     Button, 
-    StyleSheet 
+    StyleSheet,
+    StatusBar
   } from 'react-native'
   import React from 'react'
   import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,6 +22,7 @@ import {
     };    
     return (
       <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+        <StatusBar backgroundColor="#79A7D3" barStyle="light-content" />
         <View style={styles.authCheck}>
           <Text style={{fontSize: 20}}>Continue as: </Text>
           <View  style={styles.authcheckBtn} >
