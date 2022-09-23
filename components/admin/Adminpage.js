@@ -42,11 +42,20 @@ const Adminpage = ({navigation}) => {
     });
 }, [])
 
+const [loggeduser, setLoggedUser] = useState({});
+  useEffect(() => {
+      auth
+      .onAuthStateChanged(currentUser => {
+          setLoggedUser(currentUser)
+      })        
+  }, []);
+
   return (
     <View>
       <StatusBar backgroundColor="#79A7D3" barStyle="light-content" />
       <View style={styles.adminContainer}>
         <Text style={styles.profileData}>ADMIN ACCOUNT</Text>
+        <Text>Welcome {loggeduser.email}</Text>
         <View style={styles.adminContainerOptions}>
             <TouchableOpacity style={styles.Option} onPress={() => navigation.navigate('Addadmin')}>
                 <View style={styles.icon1}>
@@ -80,7 +89,7 @@ const Adminpage = ({navigation}) => {
                 </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.Option}>
+            <TouchableOpacity style={styles.Option} onPress={() => navigation.navigate('GrandJP')}>
                 <View style={styles.icon1}>
                   <Ionicons name="list" size={30} color="#79A7D3" />
                 </View>

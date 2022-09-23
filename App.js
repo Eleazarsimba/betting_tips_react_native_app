@@ -10,6 +10,7 @@ import Add_admin from './components/admin/Add_admin';
 import DailyTips from './components/admin/DailyTips';
 import Notifications from './components/admin/Notifications';
 import Eachnotification from './components/admin/Eachnotification';
+import GrandJP from './components/admin/GrandJP';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,11 @@ const App = () => {
           name='AdminTips'
           component={DailyTips}
           options={{ title: 'DAILY TIPS'}}
+        />
+        <Stack.Screen
+          name='GrandJP'
+          component={GrandJP}
+          options={{ title: 'GRAND JACKPOT'}}
         />
         <Stack.Screen
           name='Notifications'

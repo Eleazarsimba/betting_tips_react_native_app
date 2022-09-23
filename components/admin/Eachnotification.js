@@ -49,7 +49,7 @@ const deleteSelected = () => {
         <Text style={{fontSize: 17}}>{route.params.item.Info}</Text>
 
         <View style={{ flexDirection: 'row',alignSelf: 'flex-end', marginRight: 2, position: 'absolute', marginTop: 20}}>
-            <TouchableOpacity style={{marginRight: 2, padding: 12}} onPress={deleteSelected}>
+            <TouchableOpacity style={{marginTop: -20, padding: 10}} onPress={deleteSelected}>
                 <AntDesign name="delete" size={30} color="#000" />
             </TouchableOpacity>
         </View>

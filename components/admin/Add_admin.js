@@ -5,9 +5,9 @@ import {
     TouchableOpacity,
     ActivityIndicator,
 } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { TextInput } from 'react-native-paper';
-import { auth } from '../../firebase-config'
+import { auth, store } from '../../firebase-config'
 
 import axios from 'axios'
 
@@ -21,6 +21,15 @@ const Add_admin = () => {
         email: email
     }
 
+    const [loggeduser, setLoggedUser] = useState({});
+    useEffect(() => {
+        auth
+        .onAuthStateChanged(currentUser => {
+            setLoggedUser(currentUser)
+        })        
+    }, []);
+
+// console.log(loggeduser.email)
     const handleSignUp = () => {
        setAnimate(true)
        auth
@@ -28,6 +37,11 @@ const Add_admin = () => {
         .then(user => {
             axios.post(url, data)
                 .then(function (response) {
+                    store.collection('notifications').add({
+                        Info: `${loggeduser.email} added ${email} as an admin`,
+                        Time: new Date().toLocaleString(),
+                        Read: false
+                    })
                     // handle success
                     alert(`${email} has been registered successfully`);
                     setEmail('')

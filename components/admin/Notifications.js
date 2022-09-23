@@ -46,9 +46,22 @@ const Item = ({item}) => {
     </View>
   )
 }
+const clearAll = () => {
+  store
+  .collection("notifications")
+  .get()
+  .then(res => {
+    res.forEach(element => {
+      element.ref.delete();
+    });
+  });
+}
 
   return (
     <View style={{flex: 1}}>
+      <TouchableOpacity style={{marginRight: 15, alignSelf: 'flex-end'}} onPress={clearAll}>
+        <Text style={{textDecorationLine: 'underline', fontSize: 15, padding: 5}}>Clear</Text>
+      </TouchableOpacity>
         <FlatList
         data={Notifs}
         renderItem={Item}

@@ -15,7 +15,7 @@ const Jackpot = () => {
   const [animate, setAnimate] = useState(true);
 
   useEffect(() => {
-    const ref = store.collection('dailyTips').orderBy('TeamID', 'asc');
+    const ref = store.collection('grandJackpot').orderBy('TeamID', 'asc');
     ref.onSnapshot((query) => {
         const objs = [];
         query.forEach((doc) => {
@@ -29,21 +29,14 @@ const Jackpot = () => {
       });
   }, [])
 
-  // console.log(Tips)
-  const [date, setDate] = useState(null);
-  useEffect(() => {
-    let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    setDate(date);
-  }, []);
-
   const Item = ({item}) => {
     return(
-      <View key={item.TeamID} style={styles.homeHeading}>
-        <View><Text style={styles.homeOddsID}>{item.TeamID}</Text></View>
-        <View><Text style={styles.homeOddsTime}>{item.Time}</Text></View>
-        <View><Text style={styles.homeOddsTeams}>{item.Teams}</Text></View>
-        <View><Text style={styles.homeOddsTip}>{item.Tip}</Text></View>
+      <View key={item.TeamID} style={styles.jackpotHeading}>
+        <View><Text style={styles.jackpotHID}>{item.TeamID}</Text></View>
+        <View><Text style={styles.jackpotHTime}>{item.Time}</Text></View>
+        <View><Text style={styles.jackpotHDate}>{item.Date}</Text></View>
+        <View><Text style={styles.jackpotHGame}>{item.Game}</Text></View>
+        <View><Text style={styles.jackpotHTip}>{item.Tip}</Text></View>
       </View>
     )
   }
@@ -58,34 +51,15 @@ const Jackpot = () => {
       
         <View>
             <Text style={styles.todayT}>
-              Mozzartbet daily jackpot for today 
-              <Text style={styles.todayD}>  {date}</Text>
-            </Text>
-        </View>
-        <View style={styles.homeHeading}>
-          <Text style={styles.homeHeadID}>ID</Text>
-          <Text style={styles.homeHeadTime}>Time</Text>
-          <Text style={styles.homeHeadTeams}>Teams</Text>
-          <Text style={styles.homeHeadTip}>Tip</Text>
-        </View>
-        <ScrollView horizontal={true} style={{flex: 1}}>
-          <FlatList
-          data={Tips}
-          renderItem={Item}
-          keyExtractor={(item) => item.id}
-           />
-        </ScrollView>
-
-        <View>
-            <Text style={styles.todayT}>
-              Mozzartbet daily jackpot for today for the weekend
+              Betika Grand Jackpot Prediction
             </Text>
         </View>    
-        <View style={styles.homeHeading}>
-          <Text style={styles.homeHeadID}>ID</Text>
-          <Text style={styles.homeHeadTime}>Time</Text>
-          <Text style={styles.homeHeadTeams}>Teams</Text>
-          <Text style={styles.homeHeadTip}>Tip</Text>
+        <View style={styles.jackpotHeading}>
+          <Text style={styles.jackpotID}>ID</Text>
+          <Text style={styles.jackpotTime}>Time</Text>
+          <Text style={styles.jackpotDate}>Date</Text>
+          <Text style={styles.jackpotGame}>Game</Text>
+          <Text style={styles.jackpotTip}>Tip</Text>
         </View>
         <ScrollView horizontal={true} style={{flex: 1}}>
           <FlatList
@@ -120,91 +94,69 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingLeft: 130
   },
-  homeHeading: {
+  jackpotHeading: {
     width:'100%',
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
   },
-  homeHeadID: {
+  jackpotID: {
+    padding: 10,
     fontWeight: 'bold',
     fontSize: 20,
-    width: 50,
-    paddingLeft: 14,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
+    width: 40,
     marginLeft: 4
   },
-  homeHeadTime: {
+  jackpotTime: {
+    padding: 10,
     fontWeight: 'bold',
     fontSize: 20,
-    width: 80,
-    paddingLeft: 10,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
+    width: 70,
     marginLeft: 4
   },
-  homeHeadTeams: {
+  jackpotDate: {
+    padding: 10,
     fontWeight: 'bold',
     fontSize: 20,
-    width: 150,
-    paddingLeft: 6,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
+    width: 100,
     marginLeft: 4
   },
-  homeHeadTip: {
+  jackpotGame: {
+    padding: 10,
     fontWeight: 'bold',
     fontSize: 20,
-    width: 110,
-    paddingLeft: 2,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
-    marginLeft: 4
-  },
-  homeOddsID: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    width: 50,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
-    marginLeft: 4
-  },
-  homeOddsTime: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    width: 80,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
-    marginLeft: 4
-  },
-  homeOddsTeams: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    width: 150,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
-    marginLeft: 4
-  },
-  homeOddsTip: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
     width: 120,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
+    marginLeft: 4
+  },
+  jackpotTip: {
+    padding: 10,
+    fontWeight: 'bold',
+    fontSize: 20,
+    width: 70,
+    marginLeft: 4
+  },
+  jackpotHID: {
+    padding: 10,
+    width: 40,
+    marginLeft: 4
+  },
+  jackpotHTime: {
+    padding: 10,
+    width: 50,
+    marginLeft: 4
+  },
+  jackpotHDate: {
+    padding: 10,
+    width: 85,
+    marginLeft: 4
+  },
+  jackpotHGame: {
+    padding: 10,
+    width: 150,
+    marginLeft: 4
+  },
+  jackpotHTip: {
+    padding: 10,
+    width: 80,
     marginLeft: 4
   },
   todayT: {
@@ -212,12 +164,6 @@ const styles = StyleSheet.create({
     fontSize: 23,
     marginLeft: 20,
     fontWeight: 'bold',
-  },
-  todayD: {
-    padding: 5,
-    fontSize: 23,
-    marginRight: 20,
-    color: '#00008b'
   },
   activityI: {
     position: 'absolute',

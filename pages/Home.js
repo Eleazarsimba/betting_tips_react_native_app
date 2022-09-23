@@ -80,8 +80,7 @@ const Home = () => {
             {"\n"}
             The Jackpot predictions are mainly for: {"\n"}
            
-               <Text>1. Mozzartbet daily jackpot.</Text> {"\n"}
-               <Text>2. Mozzart super grand jackport.</Text> {"\n"}            
+               <Text>Betika Grand jackpot.</Text> {"\n"}          
             {"\n"}
             To join our whatsapp group 
             <Text

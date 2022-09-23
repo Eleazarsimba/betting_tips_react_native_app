@@ -12,7 +12,7 @@ import {
     TextInput 
 } from 'react-native-paper';
 import React, { useState, useEffect } from 'react'
-import { store } from '../../firebase-config';
+import { store, auth } from '../../firebase-config';
 
 const DailyTips = () => {
 
@@ -25,6 +25,14 @@ const [date, setDate] = useState(null);
 
   const [Tips,setTips] = useState([]);
   const [animate, setAnimate] = useState(true);
+
+  const [loggeduser, setLoggedUser] = useState({});
+    useEffect(() => {
+        auth
+        .onAuthStateChanged(currentUser => {
+            setLoggedUser(currentUser)
+        })        
+    }, []);
 
   useEffect(() => {
     const ref = store.collection('dailyTips').orderBy('Time', 'asc');
@@ -79,6 +87,12 @@ const [date, setDate] = useState(null);
         Tip: prediction,
         Odds: odds
     })
+    store.collection('notifications').add({
+      Info: `${loggeduser.email} added a new game in daily predictions`,
+      Time: new Date().toLocaleString(),
+      Read: false
+    })
+
     Alert.alert('Team added successfully');
     setTime('')
     setGame('')
@@ -90,6 +104,11 @@ const [date, setDate] = useState(null);
     const ref = store.collection('dailyTips').doc(item.id);
     try {
         await ref.delete();
+        store.collection('notifications').add({
+          Info: `${loggeduser.email} deleted ${item.Teams} game from daily predictions`,
+          Time: new Date().toLocaleString(),
+          Read: false
+        })
       } catch (err) {
         console.error(err);
       }
