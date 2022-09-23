@@ -2,7 +2,6 @@ import {
     View, 
     Text,
     StyleSheet,
-    ScrollView,
     FlatList,
     ActivityIndicator,
     TouchableOpacity,
@@ -112,14 +111,11 @@ const [date, setDate] = useState(null);
                 <Text style={styles.homeHeadOdds}>Odds</Text>
                 <Text style={styles.homeHeadAction}>Action</Text>
             </View>
-
-            <ScrollView horizontal={true}>
               <FlatList
               data={Tips}
               renderItem={Item}
               keyExtractor={(item) => item.id}
               />
-            </ScrollView>
             <View style={styles.activityI} >
                 <ActivityIndicator animating={animate} size="large" />      
             </View>
@@ -220,98 +216,55 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         width: 60,
-        paddingLeft: 10,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
         marginLeft: 4
       },
     homeHeadTeams: {
         fontWeight: 'bold',
         fontSize: 20,
-        width: 120,
-        paddingLeft: 6,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
+        width: 100,
         marginLeft: 4
       },
     homeHeadTip: {
         fontWeight: 'bold',
         fontSize: 20,
-        width: 80,
-        paddingLeft: 2,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
+        width: 60,
         marginLeft: 4
       },
       homeHeadOdds: {
         fontWeight: 'bold',
         fontSize: 20,
-        paddingLeft: 0,
         width: 50,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
         marginLeft: 4
       },
       homeHeadAction: {
         fontWeight: 'bold',
         fontSize: 20,
-        width: 100,
-        paddingLeft: 14,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
+        width: 50,
         marginLeft: 4
       },
       homeOddsTime: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 10,
+        padding: 10,
         width: 60,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
         marginLeft: 4
       },
       homeOddsTeams: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 2,
+        padding: 10,
         width: 120,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
         marginLeft: 4
       },
       homeOddsTip: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 2,
+        padding: 10,
         width: 80,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
         marginLeft: 4
       },
       homeOddsOdds: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 0,
+        padding: 10,
         width: 50,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
         marginLeft: 4
       },
       homeOddsAction: {
         padding: 5,
         width: 50,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
         marginLeft: 4,
         backgroundColor: '#d11a2a',
         color: '#fff'

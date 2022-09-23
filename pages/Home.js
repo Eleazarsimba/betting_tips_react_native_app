@@ -7,7 +7,8 @@ import {
     TouchableOpacity,
     Linking,
     TextInput,
-    Alert
+    Alert,
+    ActivityIndicator
 } from 'react-native'
 import React, {useState} from 'react'
 import { store } from '../firebase-config';
@@ -15,17 +16,29 @@ import { store } from '../firebase-config';
 const Home = () => {
     const [game, setGame] = useState('');
     const [tip, setTip] = useState('');
+    const [username, setUsername] = useState('');
+
+    const [animate, setAnimate] = useState(false);
+
     const handleSignIn = () => {
+      setAnimate(true)
       store.collection('yourPredictions')
       .add({
         Game: game,
         Tip: tip,
+        Username: username,
       })
       .then(() => {
-        console.log('Thanks for your prediction');
+        store.collection('notifications').add({
+          Info: `${username} predicted ${tip} in ${game} match`,
+          Time: new Date().toLocaleString(),
+          Read: false
+        })
         //clear all input values in the form
         setGame('');
         setTip('');
+        setUsername('')
+        setAnimate(false)
         Alert.alert(
           "OFISHO PREDICTION",
           `Your prediction on the match ${game} is ${tip}`,
@@ -85,7 +98,14 @@ const Home = () => {
                 {"\n"}
             </Text>
             </Text>
-
+            
+            <Text>Username:</Text>
+            <TextInput
+                style={styles.inputTeams}
+                placeholder='eg. John_doe'
+                onChangeText={text => setUsername(text)}
+                value={username}
+            />
             <Text>Teams:</Text>
             <TextInput
                 style={styles.inputTeams}
@@ -101,12 +121,14 @@ const Home = () => {
                 value={tip}
             />
             <TouchableOpacity 
-                style = {[styles.predict]} disabled={!game || !tip }
+                style = {[styles.predict]} 
+                disabled={!game || !tip }
                 onPress = {handleSignIn}
                 >
-            <Text style={styles.predicttext}>
+            { animate === false ? <Text style={styles.predicttext}>
                Predict
-            </Text>
+            </Text> :
+            <ActivityIndicator animating={animate} size="small" />}
         </TouchableOpacity>
         </View>
     </View>
@@ -156,7 +178,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     height: 40,
-    borderWidth: 1,
     margin: 5,
     backgroundColor: '#6883BC',
 },

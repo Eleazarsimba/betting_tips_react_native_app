@@ -5,8 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native'
-import React from 'react'
-import { auth } from '../../firebase-config'
+import React, { useState, useEffect } from 'react'
+import { auth, store } from '../../firebase-config'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -24,6 +24,24 @@ const Adminpage = ({navigation}) => {
      .catch(error => alert(error.message))
  }
 
+ const [Notifs,setNotifs] = useState([]);
+
+ useEffect(() => {
+  const ref = store.collection('notifications')
+  .where('Read', '==', false)
+  ref
+  .onSnapshot((query) => {
+      const objs = [];
+      query.forEach((doc) => {
+        objs.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+      setNotifs(objs)
+    });
+}, [])
+
   return (
     <View>
       <StatusBar backgroundColor="#79A7D3" barStyle="light-content" />
@@ -40,7 +58,7 @@ const Adminpage = ({navigation}) => {
             </TouchableOpacity>
             
             <View style={styles.profileNotification}>
-              <TouchableOpacity style={{flexDirection: 'row'}}>
+              <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => navigation.navigate('Notifications')}>
                 <View style={styles.icon1}>
                   <Ionicons name="notifications-circle" size={30} color="#79A7D3" />
                 </View>
@@ -49,7 +67,7 @@ const Adminpage = ({navigation}) => {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.profileCount}>
-                <Text style={styles.OptionCount}>5</Text>
+                <Text style={styles.OptionCount}>{Notifs.length}</Text>
               </TouchableOpacity>
             </View>
 
