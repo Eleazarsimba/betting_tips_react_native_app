@@ -5,7 +5,7 @@ import {
     FlatList,
     ActivityIndicator,
     TouchableOpacity,
-    Alert
+    Alert,
  } from 'react-native'
  import React, { useState, useEffect } from 'react'
  import { store, auth } from '../../firebase-config';
@@ -62,7 +62,7 @@ const GrandJP = () => {
   }
 
   const [time, setTime] = useState(0);
-  const [date, setDate] = useState('09-10-2020');
+  const [date, setDate] = useState('24/09/2022');
   const [game, setGame] = useState('');
   const [prediction, setPrediction] = useState('');
   const [ID, setID] = useState(0);
@@ -91,7 +91,7 @@ const GrandJP = () => {
     setGame('')
     setPrediction('')
     setID('')
-    setDate('')
+    setDate('24/09/2022')
   };
 
   const handleDelete = async (item) => {
@@ -107,6 +107,7 @@ const GrandJP = () => {
         console.error(err);
       }
     }
+
   return (
     <View style={styles.Tipscontainer}>
     <View style={{padding: 2}}>
@@ -258,21 +259,25 @@ const styles = StyleSheet.create({
         fontSize: 15,
         width: 60,
         marginLeft: 4,
+        padding: 10,
       },
     homeHeadDateB: {
         fontSize: 15,
-        width: 80,
+        width: 90,
         marginLeft: 4,
+        padding: 10,
       },
     homeHeadGameB: {
         fontSize: 15,
         width: 120,
         marginLeft: 4,
+        padding: 10,
       },
     homeHeadTipB: {
         fontSize: 15,
         width: 90,
         marginLeft: 4,
+        padding: 10,
       },
     homeHeadActionB: {
         padding: 5,

@@ -61,7 +61,7 @@ const Jackpot = () => {
           <Text style={styles.jackpotGame}>Game</Text>
           <Text style={styles.jackpotTip}>Tip</Text>
         </View>
-        <ScrollView horizontal={true} style={{flex: 1}}>
+        <ScrollView horizontal={true} style={{flexDirection: 'column'}}>
           <FlatList
           data={Tips}
           renderItem={Item}
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   jackpotHDate: {
     padding: 10,
-    width: 85,
+    width: 100,
     marginLeft: 4
   },
   jackpotHGame: {
